@@ -7,10 +7,10 @@ import ViewSlider from 'react-native-view-slider'
 import ViewBox from './components/ViewBox';
 
 import Calculator from './components/Calculator';
-import NumberGuess from './components/NumberGuess';
+import ShoppingList from './components/ShoppingList';
 
 const blocks = require('./assets/images/blocks.png');
-const lens = require('./assets/images/lens.png');
+const hue = require('./assets/images/hue.jpg');
 
 
 const { height } = Dimensions.get('window');
@@ -23,7 +23,7 @@ function App() {
         renderSlides = {
           <>
             <ViewBox image={blocks}><Calculator/></ViewBox>
-            <ViewBox image={lens}><NumberGuess/></ViewBox>
+            <ViewBox image={hue}><ShoppingList/></ViewBox>
          </> 
       }
       style={styles.slider}
