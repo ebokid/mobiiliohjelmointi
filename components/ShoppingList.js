@@ -26,7 +26,7 @@ export default function ShoppingList() {
     return (
       <SafeAreaView>
         <TextInput
-          style={[styles.input, styles.bag]}
+          style={[styles.input]}
           onChangeText={input => setItemInput(input)}
           value={itemInput}
           keyboardType="text"
@@ -59,12 +59,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     backgroundColor: '#000000c0',
-  }, 
-  text: {
-    color: '#fff',
-    margin: 20,
-    fontSize: 30
-  }, 
+  },  
   buttonContainer: {
     flexDirection:"row",
     justifyContent: "center"
