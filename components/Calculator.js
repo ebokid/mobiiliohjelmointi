@@ -1,18 +1,34 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Button, View, Text, StyleSheet, TextInput} from 'react-native';
+import {SafeAreaView, Button, View, Text, StyleSheet, TextInput, FlatList} from 'react-native';
 
 export default function Calculator() {
 
     const [number1, setNumber1] = useState(0);
     const [number2, setNumber2] = useState(0);
+    const [operations, setOperations] = useState([])
     const [result, setResult] = useState(null);
 
+    const saveOperation = operation => {
+      operations.push(operation)
+      setOperations(operations)
+    }
+
     const plus = () => {
-        setResult(number1 + number2)
+        const res = number1 + number2
+        saveOperation(number1 + ' + ' + number2 + ' = ' + res)
+        setResult(res)
     }
     const minus = () => {
-        setResult(number1 - number2)
+      const res = number1 - number2
+      saveOperation(number1 + ' - ' + number2 + ' = ' + res)
+      setResult(res)
     }
+
+    const Item = ({title}) => (
+      <View style={styles.historyContainer}>
+        <Text style={styles.historyItem}>{title}</Text>
+      </View>
+    );
   
     return (
       <SafeAreaView>
@@ -39,6 +55,15 @@ export default function Calculator() {
                 <Button color='#4B637A' title="-" onPress={() => minus()}>Button</Button>
             </View>
         </View>
+        {operations.length > 0 && 
+        <View style={styles.historyContainer}>
+          <Text style={styles.historyItem}>History:</Text>
+        </View>}
+          <FlatList
+            data={operations}
+            renderItem={({item}) => <Item title={item} />}
+            keyExtractor={item => item}
+          />
       </SafeAreaView>
     );
 }
@@ -67,5 +92,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
     height: 50,
     width: 50,
+  },
+  historyContainer: {
+    flexDirection:"row",
+    justifyContent: "center"
+  },
+  historyItem: {
+    color: '#fff',
+    margin: 5
   }
 });
