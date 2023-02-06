@@ -1,55 +1,23 @@
-import React from 'react';
-import {
-StyleSheet,
-Dimensions,
-} from 'react-native';
-import ViewSlider from 'react-native-view-slider'
-import ViewBox from './components/ViewBox';
+import React from "react";
 
-import Calculator from './components/Calculator';
-import ShoppingList from './components/ShoppingList';
+import { NavigationContainer } from "@react-navigation/native";
 
-const blocks = require('./assets/images/blocks.png');
-const hue = require('./assets/images/hue.jpg');
+import Calculator from "./components/calculator/Calculator";
+import CalculatorHistory from "./components/calculator/CalculatorHistory";
 
+import { createStackNavigator } from "@react-navigation/stack";
 
-const { height } = Dimensions.get('window');
-
+const Stack = createStackNavigator();
 
 function App() {
   return (
-    <>
-      <ViewSlider 
-        renderSlides = {
-          <>
-            <ViewBox image={blocks}><Calculator/></ViewBox>
-            <ViewBox image={hue}><ShoppingList/></ViewBox>
-         </> 
-      }
-      style={styles.slider}
-      height = {height}
-      slideCount = {2} 
-      dots = {true}
-      dotActiveColor = 'red'
-      dotInactiveColor = 'gray'
-      dotsContainerStyle={styles.dotContainer}
-     />
-</>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Calculator} />
+        <Stack.Screen name="History" component={CalculatorHistory} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-const styles = StyleSheet.create({
-  slider: {
-      flex: 1,
-      alignSelf: 'center',
-      justifyContent: 'center',
-      alignItems: 'center'
-  },
-  dotContainer: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    bottom: 25
-  }
-});
+}
 
 export default App;
